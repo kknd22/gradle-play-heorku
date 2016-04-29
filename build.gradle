@@ -34,8 +34,15 @@ dependencies {
   play "com.typesafe.play:play-cache_$scalaVersion:$playVersion"
   play "com.typesafe.play:play-jdbc_$scalaVersion:$playVersion"
 
-  play 'org.postgresql:postgresql:9.4-1201-jdbc41'
-  play 'com.newrelic.agent.java:newrelic-agent:3.22.0'
+  play "com.typesafe.play:play-jdbc-evolutions_$scalaVersion:$playVersion"
+
+  //play 'org.postgresql:postgresql:9.4-1201-jdbc41'
+  //play 'com.newrelic.agent.java:newrelic-agent:3.22.0'
   play 'org.jscience:jscience:4.3.1'
+}
+
+tasks.withType(PlayRun) {
+    httpPort = 7777
+    forkOptions.jvmArgs  += "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
 }
 
